@@ -13,9 +13,7 @@ class TestPasswordReset:
 
     def test_password_recovery_page_by_clicking_the_recover_password(self, driver):
         reset_password = GeneralMethods(driver)
-        WebDriverWait(driver, 30).until(
-            expected_conditions.element_to_be_clickable(Locators.BUTTON_PERSONAL_ACCOUNT))
-        reset_password.click_by_elemet_locator(Locators.BUTTON_PERSONAL_ACCOUNT)
+        reset_password.click_ver_two(driver, Locators.BUTTON_PERSONAL_ACCOUNT)
         reset_password.click_by_elemet_locator(Locators.LINK_FORGOT_PASSWORD)
         assert reset_password.element_is_displayed(Locators.BUTTON_RESET)
 
@@ -30,11 +28,9 @@ class TestPasswordReset:
 
     def test_clicking_show_hide_password_button_makes_field_active(self, driver):
         base = GeneralMethods(driver)
-        WebDriverWait(driver, 30).until(
-            expected_conditions.element_to_be_clickable(Locators.BUTTON_PERSONAL_ACCOUNT))
-        base.click_by_elemet_locator(Locators.BUTTON_PERSONAL_ACCOUNT)
+        base.click_ver_two(driver, Locators.BUTTON_PERSONAL_ACCOUNT)
         base.insert_data_to_fild(Locators.ACCOUNT_PASSWORD, '12345')
         base.click_by_elemet_locator(Locators.HIDE_SHOW_PASSWORD)
-        assert base.element_is_displayed(Locators.TEST) == True
+        assert base.element_is_displayed(Locators.HIDE_SHOW_ELEM) == True
 
 

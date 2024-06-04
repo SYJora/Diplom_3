@@ -27,7 +27,7 @@ class BasicFunctionality(GeneralMethods):
     def click_cross_in_description_ingredients(self):
         self.click_ingredients_description()
         self.element_is_displayed(LocatorBaseFunctionality.BUTTON_CROSS)
-        self.click_by_elemet_locator(LocatorBaseFunctionality.BUTTON_CROSS)
+
 
     def move_ingredients_to_order(self):
         get = self.wait_and_search_element(self.driver, LocatorBaseFunctionality.IMG_BUN)

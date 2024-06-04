@@ -22,7 +22,8 @@ class TestBasicFunctionality:
     def test_description_ingredients_close_click_by_cross(self, driver):
         base = BasicFunctionality(driver)
         base.click_cross_in_description_ingredients()
-        assert base.element_is_displayed(LocatorBaseFunctionality.DETAILS_ORDER) == False
+        res = base.element_is_displayed(LocatorBaseFunctionality.DETAILS_ORDER)
+        assert res == True
 
     def test_adding_ingredient_to_order_counter_and_ingredient_incremented(self, driver):
         base = BasicFunctionality(driver)

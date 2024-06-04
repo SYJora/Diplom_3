@@ -20,7 +20,7 @@ class Locators:
     HIDE_SHOW_PASSWORD = (By.XPATH, "//div[@class = 'input__icon input__icon-action']")
     ACCOUNT_PASSWORD = (By.XPATH, "//input[@type = 'password']")  # Поле ввода пароля
     LINK_HISTORY_ORDER = (By.XPATH, "//a[@href = '/account/order-history']") # Сылка на Историю заказов личном кабинете
-    TEST = (By.XPATH, "//div[@class='input pr-6 pl-6 input_type_text input_size_default input_status_active']")
+    HIDE_SHOW_ELEM = (By.XPATH, "//div[@class='input pr-6 pl-6 input_type_text input_size_default input_status_active']")
 
 class LocatorBaseFunctionality:
     LIST_ORDER = (By.XPATH, "//h1[@class = 'text text_type_main-large mt-10 mb-5']") # Надпесь в Лента заказов
@@ -30,3 +30,14 @@ class LocatorBaseFunctionality:
     TWO_BUN_COUNTER = (By.XPATH, "//div[@class = 'counter_counter__ZNLkj counter_default__28sqi']/descendant::p[contains(text(), '2')]")
     UP_BUN = (By.XPATH, "//span[contains(text(), 'Перетяните булочку сюда (верх)')]")
     TEXT_ORDER_START_COOK = (By.XPATH, "//p[contains(text(), 'Ваш заказ начали готовить')]")
+
+class LocatorListOrder:
+    FIRST_ORDER = (By.XPATH, "(//ul[@class = 'OrderFeed_list__OLh59']/child::*)[1]")
+    TEXT_IN_DESCRIPTION_CARD = (By.XPATH, "//p[contains(text(), 'Cостав')]")
+    COUNT_DEFOULT = (
+        By.XPATH, "//div[@class = 'undefined mb-15']/descendant::p[@class = 'OrderFeed_number__2MbrQ text text_type_digits-large']"
+    )
+    DONE_COUNT = (By.XPATH, "//div[@class = 'undefined mb-15']/following::p[@class = 'OrderFeed_number__2MbrQ text text_type_digits-large']")
+    STATYS_ORDER = (By.XPATH, "//ul[@class = 'OrderFeed_orderListReady__1YFem OrderFeed_orderList__cBvyi']/child::li")
+    ORDER_CROSS = (By.XPATH, "//button[@class = 'Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK']")
+    ORDER_COMPLIT = (By.XPATH, "//img[@class = 'Modal_modal__image__2nh17']")

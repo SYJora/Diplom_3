@@ -1,7 +1,5 @@
-
-from pages.base_page import GeneralMethods
-
-
+import string
+import random
 
 class DataResetPassword:
     email = 'teretey@gmail.com'
@@ -9,11 +7,13 @@ class DataResetPassword:
 
 class DataCreateUser:
 
-    login = GeneralMethods.generate_random_word(7)
+    def generate_random_word(length):
+        letters = string.ascii_lowercase
+        return ''.join(random.choice(letters) for _ in range(length))
 
 
     CREAT_USER = {
-        "email": f"{GeneralMethods.generate_random_word(7)}@mail.ru",
+        "email": f"{generate_random_word(7)}@mail.ru",
         "password": "121345",
         "name": 'test'
 
@@ -21,7 +21,7 @@ class DataCreateUser:
     }
 
     LOGIN_USER = {
-        "email": f"{login}@mail.ru",
+        "email": f"{generate_random_word(7)}@mail.ru",
         "password": "12134"
     }
 

@@ -1,11 +1,10 @@
 import pytest
 from selenium import webdriver
 
-from data.data_reset_password import DataCreateUser
 from urls import Urls
 
 
-@pytest.fixture(params=['firefox', 'chrome'], scope='functions')
+@pytest.fixture(scope='function', params=['firefox', 'chrome'])
 def driver(request):
     browser = None
 
