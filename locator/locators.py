@@ -20,9 +20,13 @@ class Locators:
     HIDE_SHOW_PASSWORD = (By.XPATH, "//div[@class = 'input__icon input__icon-action']")
     ACCOUNT_PASSWORD = (By.XPATH, "//input[@type = 'password']")  # Поле ввода пароля
     LINK_HISTORY_ORDER = (By.XPATH, "//a[@href = '/account/order-history']") # Сылка на Историю заказов личном кабинете
+    TEST = (By.XPATH, "//div[@class='input pr-6 pl-6 input_type_text input_size_default input_status_active']")
 
 class LocatorBaseFunctionality:
     LIST_ORDER = (By.XPATH, "//h1[@class = 'text text_type_main-large mt-10 mb-5']") # Надпесь в Лента заказов
     IMG_BUN = (By.XPATH, "//img[@src = 'https://code.s3.yandex.net/react/code/bun-01.png']")
     DETAILS_ORDER = (By.XPATH, "//h2[contains(text(), 'Детали ингредиента')]")
-
+    BUTTON_CROSS = (By.XPATH, "//div[@class = 'Modal_modal__contentBox__sCy8X pt-10 pb-15']/following-sibling::button") # Крестик в описаний ингридиента
+    TWO_BUN_COUNTER = (By.XPATH, "//div[@class = 'counter_counter__ZNLkj counter_default__28sqi']/descendant::p[contains(text(), '2')]")
+    UP_BUN = (By.XPATH, "//span[contains(text(), 'Перетяните булочку сюда (верх)')]")
+    TEXT_ORDER_START_COOK = (By.XPATH, "//p[contains(text(), 'Ваш заказ начали готовить')]")

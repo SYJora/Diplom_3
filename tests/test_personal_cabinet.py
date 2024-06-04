@@ -7,7 +7,7 @@ class TestPersonalCabinet:
 
     def test_click_through_personal_сabinet(self, driver):
         base = GeneralMethods(driver)
-        base.click_ver_ywo(driver, Locators.BUTTON_PERSONAL_ACCOUNT)
+        base.click_ver_two(driver, Locators.BUTTON_PERSONAL_ACCOUNT)
         assert driver.current_url == Urls.ACOUNT_LOGIN
 
     def test_click_through_history_order(self, driver):

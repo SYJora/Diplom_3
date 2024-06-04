@@ -13,4 +13,7 @@ class Urls:
 
     CREATE_USER = '/api/auth/register'
     LOGIN_USER = '/api/auth/login'
+    LIST_INGR = '/api/ingredients'
+    ORDER = '/api/orders'
+
 

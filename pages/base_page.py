@@ -14,6 +14,9 @@ class GeneralMethods:
         letters = string.ascii_lowercase
         return ''.join(random.choice(letters) for _ in range(length))
 
+    def look_for_locator(self, locator):
+        return self.driver.find_element(*locator)
+
     def click_by_elemet_locator(self, locator):
         self.driver.find_element(*locator).click()
 
@@ -26,10 +29,16 @@ class GeneralMethods:
     def insert_data_to_fild(self, locator, data):
         self.driver.find_element(*locator).send_keys(data)
 
-    def click_ver_ywo(self, driver, locator):
+    def click_ver_two(self, driver, locator):
         filter_field = WebDriverWait(driver, 20).until(EC.element_to_be_clickable(locator))
         ActionChains(driver).move_to_element(filter_field).click().perform()
 
+    def wait_and_search_element(self, driver, locator):
+        WebDriverWait(driver, 20).until(EC.element_to_be_clickable(locator))
+        return driver.find_element(*locator)
+
+    def get_text_from_element(self, locator):
+        return self.driver.find_element(*locator).text
 
     def doubel_click(self, driver, locator):
         clickable = driver.find_element(*locator)

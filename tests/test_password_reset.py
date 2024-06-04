@@ -23,7 +23,7 @@ class TestPasswordReset:
         base = GeneralMethods(driver_recovery)
         WebDriverWait(driver_recovery, 30).until(EC.presence_of_element_located(Locators.BUTTON_RESET))
         base.insert_data_to_fild(Locators.ACCOUNT_EMAIL, DataResetPassword.email)
-        base.click_ver_ywo(driver_recovery, Locators.BUTTON_RESET)
+        base.click_ver_two(driver_recovery, Locators.BUTTON_RESET)
         WebDriverWait(driver_recovery, 10).until(
             expected_conditions.url_to_be(Urls.RESET_PASSWORD))
         assert driver_recovery.current_url == Urls.RESET_PASSWORD
@@ -35,7 +35,6 @@ class TestPasswordReset:
         base.click_by_elemet_locator(Locators.BUTTON_PERSONAL_ACCOUNT)
         base.insert_data_to_fild(Locators.ACCOUNT_PASSWORD, '12345')
         base.click_by_elemet_locator(Locators.HIDE_SHOW_PASSWORD)
-        text = driver.find_element(By.ID, "text").text
-        assert text == True
+        assert base.element_is_displayed(Locators.TEST) == True
 
 
