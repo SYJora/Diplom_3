@@ -1,3 +1,6 @@
+import time
+
+import allure
 import requests
 from selenium.webdriver.common.by import By
 
@@ -11,15 +14,17 @@ from urls import Urls
 
 class ListOrder(GeneralMethods):
 
+    @allure.step('Нажатие на кнопку Лента заказа')
     def select_list_order(self):
         self.click_ver_two(self.driver, Locators.LOGO)
         self.click_by_elemet_locator(Locators.BUTTON_LIST_ORDER)
 
-
+    @allure.step('Нажатие на кнопку персональный аккаунт')
     def press_personal_account(self):
         self.wait_element(self.driver, Locators.BUTTON_MAKE_ORDER)
         self.click_ver_two(self.driver, Locators.BUTTON_PERSONAL_ACCOUNT)
 
+    @allure.step('Получение ингредиента')
     def get_ingredients(self):
         respons = requests.get(Urls.BASE_URL + Urls.LIST_INGR)
         ingr = []
@@ -27,6 +32,7 @@ class ListOrder(GeneralMethods):
             ingr.append(respons.json()['data'][i]['_id'])
         return ingr
 
+    @allure.step('Сделать заказ через API')
     def make_oder_api(self):
         user = PersonalCabinet(self.driver)
         data = user.generet_data_for_api()
@@ -36,6 +42,7 @@ class ListOrder(GeneralMethods):
                                 json={"ingredients": self.get_ingredients()})
         return respons
 
+    @allure.step('Получить номер заказа из Историй заказов')
     def get_order_from_history(self, order):
         self.wait_element(self.driver, Locators.LINK_HISTORY_ORDER)
         self.click_ver_two(self.driver, Locators.LINK_HISTORY_ORDER)
@@ -43,24 +50,28 @@ class ListOrder(GeneralMethods):
         num_order = self.get_text_from_element((By.XPATH, f"//p[contains(text(), '#0{order}')]"))
         return num_order
 
+    @allure.step('Логирование в персональный кабинет')
     def log_in_personal_cabinet(self, data):
         self.insert_data_to_fild(Locators.ACCOUNT_EMAIL, data)
         self.insert_data_to_fild(Locators.ACCOUNT_PASSWORD, DataCreateUser.CREAT_USER['password'])
         self.click_by_elemet_locator(Locators.BUTTON_LOGIN)
 
-
+    @allure.step('Нажатие кнопки Личный кабинет')
     def enter_to_personal_cabinet(self, data):
         self.click_ver_two(self.driver, Locators.BUTTON_PERSONAL_ACCOUNT)
         self.log_in_personal_cabinet(data)
 
+    @allure.step('Получение номера заказа из Ленты заказов')
     def list_order_get_number_order(self, order):
         self.wait_and_search_element(self.driver, (By.XPATH, f"//p[contains(text(), '{order}')]"))
         return self.element_is_displayed((By.XPATH, f"//p[contains(text(), '{order}')]"))
 
+    @allure.step('Нажатие на первый заказ из Ленты заказов')
     def select_first_order_in_list(self):
         self.select_list_order()
         self.click_ver_two(self.driver, LocatorListOrder.FIRST_ORDER)
 
+    @allure.step('Создание пользователя и добавление заказа')
     def creat_user_add_ingredirnts(self):
         user = PersonalCabinet(self.driver)
         data = user.generet_data_for_api()
@@ -72,9 +83,11 @@ class ListOrder(GeneralMethods):
         self.wait_element(self.driver, LocatorListOrder.ORDER_CROSS)
         self.click_ver_two(self.driver, LocatorBaseFunctionality.TEXT_ORDER_START_COOK)
         self.wait_element(self.driver, LocatorListOrder.ORDER_COMPLIT)
+        time.sleep(2)
         self.click_ver_two(self.driver, LocatorListOrder.ORDER_CROSS)
         self.wait_element(self.driver, Locators.BUTTON_MAKE_ORDER)
         self.select_list_order()
+        self.wait_element(self.driver, LocatorListOrder.FIRST_ORDER)
         text = self.get_text_from_element(LocatorListOrder.STATYS_ORDER)
         return text
 
