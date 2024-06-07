@@ -1,7 +1,7 @@
 import allure
 
 from locator.locators import Locators
-from pages.base_page import GeneralMethods
+from pages.base_page import BasePage
 from pages.personal_cabinet_page import PersonalCabinet
 from urls import Urls
 
@@ -10,8 +10,8 @@ class TestPersonalCabinet:
     @allure.title('Проверка кнопки «Личный кабинет»')
     @allure.description('Переход по клику на «Личный кабинет»')
     def test_click_through_personal_сabinet(self, driver):
-        base = GeneralMethods(driver)
-        base.click_ver_two(driver, Locators.BUTTON_PERSONAL_ACCOUNT)
+        base = BasePage(driver)
+        base.find_click_element(Locators.BUTTON_PERSONAL_ACCOUNT)
         assert driver.current_url == Urls.ACOUNT_LOGIN
 
     @allure.title('Проверка кнопки «История заказов»')

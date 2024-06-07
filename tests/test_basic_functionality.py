@@ -1,6 +1,6 @@
 import allure
 
-from locator.locators import LocatorBaseFunctionality, Locators
+from locator.locators import LocatorBaseFunctionality
 from pages.basic_functionality import BasicFunctionality
 from urls import Urls
 
@@ -11,13 +11,15 @@ class TestBasicFunctionality:
     @allure.description('После нажатия на кнопку конструктор выполняется переход на главную страницу.')
     def test_click_on_constructor(self, driver):
         base = BasicFunctionality(driver)
-        assert base.click_list_order_and_retern_onmain_page() != Urls.BASE_URL
+        base.click_list_order_and_retern_onmain_page()
+        assert driver.current_url == Urls.BASE_URL
 
     @allure.title('Проверка кнопки Лента заказов.')
     @allure.description('Нажатие на кнопку Лента заказов выполняется переход на страницу заказов.')
     def test_click_on_list_order(self, driver):
         base = BasicFunctionality(driver)
-        assert base.click_on_list_order() == Urls.LIST_ORDER
+        base.click_on_list_order()
+        assert driver.current_url == Urls.LIST_ORDER
 
     @allure.title('Описание Ингридиента.')
     @allure.description('При нажатий на ингридиента открывается карточка описания ингридиента.')
@@ -27,7 +29,7 @@ class TestBasicFunctionality:
         assert base.element_is_displayed(LocatorBaseFunctionality.DETAILS_ORDER) == True
 
     @allure.title('Нажатие на крестик')
-    @allure.description('Проверка закрытия карточки ингридиента нажатием на крестик ')
+    @allure.description('Проверка закрытия карточки ингридиента нажатием на крестик')
     def test_description_ingredients_close_click_by_cross(self, driver):
         base = BasicFunctionality(driver)
         base.click_cross_in_description_ingredients()

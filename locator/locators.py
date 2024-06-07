@@ -38,6 +38,5 @@ class LocatorListOrder:
         By.XPATH, "//div[@class = 'undefined mb-15']/descendant::p[@class = 'OrderFeed_number__2MbrQ text text_type_digits-large']"
     )
     DONE_COUNT = (By.XPATH, "//div[@class = 'undefined mb-15']/following::p[@class = 'OrderFeed_number__2MbrQ text text_type_digits-large']")
-    STATYS_ORDER = (By.XPATH, "//ul[@class = 'OrderFeed_orderListReady__1YFem OrderFeed_orderList__cBvyi']/child::li")
-    ORDER_CROSS = (By.XPATH, "//button[@class = 'Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK']")
-    ORDER_COMPLIT = (By.XPATH, "//img[@class = 'Modal_modal__image__2nh17']")
+    PROGRES_BAR = (By.XPATH, "//img[@src = './static/media/loading.89540200.svg']")
+    STATYS_ORDER = (By.XPATH, "//li[@class = 'text text_type_main-small']")

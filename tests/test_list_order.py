@@ -18,31 +18,24 @@ class TestListOrder:
     @allure.description('Заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»')
     def test_order_in_history_displayed_in_list_order(self, driver):
         base = ListOrder(driver)
-        respons = base.make_oder_api()
-        num = respons.json()['order']['number']
-        base.enter_to_personal_cabinet(respons.json()['order']['owner']['email'])
-        base.press_personal_account()
-        history_order = base.get_order_from_history(num)
-        base.select_list_order()
-        assert base.list_order_get_number_order(history_order) == True
+        assert base.check_order_in_history_and_list_order() == True
 
-    @allure.title('Проверка счетчика выполнено за все время ')
+    @allure.title('Проверка счетчика выполнено за все время')
     @allure.description('При создании нового заказа счётчик Выполнено за всё время увеличивается,')
     def test_count_of_common_count(self, driver):
         base = ListOrder(driver)
-        base.select_list_order()
-        befor = base.get_text_from_element(LocatorListOrder.COUNT_DEFOULT)
-        base.make_oder_api()
-        assert base.get_text_from_element(LocatorListOrder.COUNT_DEFOULT) != befor
+        befor = base.get_count_of_common()
+        current_count = base.make_order_and_returncurrent_count()
+        assert befor != current_count
+
 
     @allure.title('Проверка счетчика выполнено за сегодня')
     @allure.description('При создании нового заказа счётчик Выполнено за сегодня увеличивается')
     def test_count_done_order(self, driver):
         base = ListOrder(driver)
-        base.select_list_order()
-        befor = base.get_text_from_element(LocatorListOrder.DONE_COUNT)
-        base.make_oder_api()
-        assert base.get_text_from_element(LocatorListOrder.DONE_COUNT) != befor
+        befor = base.get_count_make_burger_a_day()
+        current_count = base.get_new_count_make_burger_a_day()
+        assert befor != current_count
 
     @allure.title('Номер заказа появляется в строке в работе')
     @allure.description('После оформления заказа его номер появляется в разделе В работе')
