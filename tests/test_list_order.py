@@ -27,7 +27,7 @@ class TestListOrder:
         base = ListOrder(driver)
         befor = base.get_count_of_common()
         current_count = base.make_order_and_returncurrent_count()
-        assert befor != current_count.split('\n')
+        assert befor != current_count
 
 
     @allure.title('Проверка счетчика выполнено за сегодня')
