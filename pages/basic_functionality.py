@@ -28,16 +28,31 @@ class BasicFunctionality(BasePage):
         self.wait_element(LocatorBaseFunctionality.IMG_BUN)
         self.click_by_elemet_locator(LocatorBaseFunctionality.IMG_BUN)
 
+    @allure.step('Вернут True если элимент отображается')
+    def click_ingredient_check_displade(self):
+        self.click_ingredients_description()
+        return self.element_is_displayed(LocatorBaseFunctionality.DETAILS_ORDER)
+
+
     @allure.step('Нажимаем на крестик в карточки ингридиента')
     def click_cross_in_description_ingredients(self):
         self.click_ingredients_description()
         self.element_is_displayed(LocatorBaseFunctionality.BUTTON_CROSS)
+
+    def click_cross_in_description_ingredients_check_displayed(self):
+        self.click_cross_in_description_ingredients()
+        return self.element_is_displayed(LocatorBaseFunctionality.DETAILS_ORDER)
 
     @allure.step('Переносим ингредиент в заказа')
     def move_ingredients_to_order(self):
         get = self.wait_and_search_element(LocatorBaseFunctionality.IMG_BUN)
         move_to = self.wait_and_search_element(LocatorBaseFunctionality.UP_BUN)
         drag_and_drop(self.driver, get, move_to)
+
+    def move_ingredients_to_order_check_is_displayed(self):
+        self.move_ingredients_to_order()
+        return self.element_is_displayed(LocatorBaseFunctionality.TWO_BUN_COUNTER)
+
 
     @allure.step('Делаем заказа авторизированным пользователем')
     def make_order_login_user(self):
@@ -56,4 +71,8 @@ class BasicFunctionality(BasePage):
         self.wait_element(Locators.BUTTON_MAKE_ORDER)
         self.move_ingredients_to_order()
         self.find_click_element(Locators.BUTTON_MAKE_ORDER)
+        self.wait_text_in_element(LocatorBaseFunctionality.TEXT_ORDER_START_COOK, 'Ваш заказ начали готовить')
 
+    @allure.step('Врнет статус заказа')
+    def displayed_statys_order(self):
+        return self.element_is_displayed(LocatorBaseFunctionality.TEXT_ORDER_START_COOK)

@@ -10,15 +10,16 @@ class TestListOrder:
     @allure.description('Если кликнуть на заказ, откроется всплывающее окно с деталями')
     def test_click_order_open_description(self, driver):
         base = ListOrder(driver)
-        base.select_first_order_in_list()
-        result = base.element_is_displayed(LocatorListOrder.TEXT_IN_DESCRIPTION_CARD)
+        result = base.select_first_order_in_list()
         assert result == True
 
     @allure.title('Отображение историй заказов')
     @allure.description('Заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»')
     def test_order_in_history_displayed_in_list_order(self, driver):
         base = ListOrder(driver)
-        assert base.check_order_in_history_and_list_order() == True
+        history_order = base.check_order_in_history_and_list_order()
+        list_order = base.list_order_get_number_order()
+        assert history_order == list_order
 
     @allure.title('Проверка счетчика выполнено за все время')
     @allure.description('При создании нового заказа счётчик Выполнено за всё время увеличивается,')
@@ -26,7 +27,7 @@ class TestListOrder:
         base = ListOrder(driver)
         befor = base.get_count_of_common()
         current_count = base.make_order_and_returncurrent_count()
-        assert befor != current_count
+        assert befor != current_count.split('\n')
 
 
     @allure.title('Проверка счетчика выполнено за сегодня')

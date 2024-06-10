@@ -27,3 +27,6 @@ class RestorPassword(BasePage):
         self.insert_data_to_fild(Locators.ACCOUNT_PASSWORD, '12345')
         self.click_by_elemet_locator(Locators.HIDE_SHOW_PASSWORD)
         return self.element_is_displayed(Locators.HIDE_SHOW_ELEM)
+
+    def get_to_url(self):
+        self.driver.get(Urls.FORGOT_PASSWORD)

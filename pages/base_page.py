@@ -71,6 +71,9 @@ class BasePage:
         self.wait_element(locator)
         return self.driver.find_element(*locator).text
 
+    def get_current_url(self):
+        return self.driver.current_url
+
     @allure.step('Генерация данных')
     def generate_random_word(length):
         letters = string.ascii_lowercase

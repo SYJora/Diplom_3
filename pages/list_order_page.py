@@ -1,5 +1,4 @@
 
-
 import allure
 
 from selenium.webdriver.common.by import By
@@ -24,12 +23,11 @@ class ListOrder(BasePage):
         self.find_click_element(Locators.BUTTON_PERSONAL_ACCOUNT)
 
     @allure.step('Получить номер заказа из Историй заказов')
-    def get_order_from_history(self, order):
+    def get_order_from_history(self):
         self.wait_element(Locators.LINK_HISTORY_ORDER)
         self.find_click_element(Locators.LINK_HISTORY_ORDER)
-        self.wait_and_search_element((By.XPATH, f"//p[contains(text(), '#0{order}')]"))
-        num_order = self.get_text_from_element((By.XPATH, f"//p[contains(text(), '#0{order}')]"))
-        return num_order
+        history = self.get_text_from_element(LocatorListOrder.HISTORY_ORDER)
+        return history
 
     @allure.step('Логирование в персональный кабинет')
     def log_in_personal_cabinet(self, data):
@@ -43,14 +41,14 @@ class ListOrder(BasePage):
         self.log_in_personal_cabinet(data)
 
     @allure.step('Получение номера заказа из Ленты заказов')
-    def list_order_get_number_order(self, order):
-        self.wait_and_search_element((By.XPATH, f"//p[contains(text(), '{order}')]"))
-        return self.element_is_displayed((By.XPATH, f"//p[contains(text(), '{order}')]"))
+    def list_order_get_number_order(self):
+        return self.get_text_from_element(LocatorListOrder.FIRST_ORDER).split('\n')[0]
 
     @allure.step('Нажатие на первый заказ из Ленты заказов')
     def select_first_order_in_list(self):
         self.select_list_order()
         self.find_click_element(LocatorListOrder.FIRST_ORDER)
+        return self.element_is_displayed(LocatorListOrder.TEXT_IN_DESCRIPTION_CARD)
 
     @allure.step('Войти в акаунт')
     def enter_log_data(self, data):
@@ -69,12 +67,11 @@ class ListOrder(BasePage):
     def check_order_in_history_and_list_order(self):
         api = Helper()
         respons = api.make_oder_api()
-        num = respons.json()['order']['number']
         self.enter_to_personal_cabinet(respons.json()['order']['owner']['email'])
         self.press_personal_account()
-        history_order = self.get_order_from_history(num)
+        history_order = self.get_order_from_history()
         self.select_list_order()
-        return self.list_order_get_number_order(history_order)
+        return history_order
 
     @allure.step('Получить значение из выполненын всего заказов')
     def get_count_of_common(self):

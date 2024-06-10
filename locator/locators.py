@@ -40,3 +40,4 @@ class LocatorListOrder:
     DONE_COUNT = (By.XPATH, "//div[@class = 'undefined mb-15']/following::p[@class = 'OrderFeed_number__2MbrQ text text_type_digits-large']")
     PROGRES_BAR = (By.XPATH, "//img[@src = './static/media/loading.89540200.svg']")
     STATYS_ORDER = (By.XPATH, "//li[@class = 'text text_type_main-small']")
+    HISTORY_ORDER = (By.XPATH, "//p[@class = 'text text_type_digits-default']")

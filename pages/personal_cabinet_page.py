@@ -1,5 +1,4 @@
 
-
 import allure
 
 from data.data_reset_password import DataResetPassword
@@ -40,6 +39,10 @@ class PersonalCabinet(BasePage):
         self.find_click_element(Locators.BUTTON_PERSONAL_ACCOUNT)
         self.find_click_element(Locators.BUTTON_LOGOUT)
         self.wait_element(Locators.BUTTON_LOGIN)
+
+    @allure.step('Нажатие на кнопку Личный кабинет')
+    def click_on_button_personal_account(self):
+        self.find_click_element(Locators.BUTTON_PERSONAL_ACCOUNT)
 
 
 

@@ -16,10 +16,10 @@ class TestPasswordReset:
     @allure.title('Тест ввести эмейл и нажать кнопку востановить.')
     @allure.description('Проверка работы поля е-мейла и кнопки восстановить и перехода.')
     def test_enter_email_click_button_recovery(self, driver):
-        driver.get(Urls.FORGOT_PASSWORD)
         base = RestorPassword(driver)
+        base.get_to_url()
         base.enter_email_and_click_recovery_button()
-        assert driver.current_url == Urls.RESET_PASSWORD
+        assert base.get_current_url() == Urls.RESET_PASSWORD
 
     @allure.title('Проверка кнопки отображения и скрытия пароля.')
     @allure.description('После нажатия кнопки показать пароль поле становится активным.')
